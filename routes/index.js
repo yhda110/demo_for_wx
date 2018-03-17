@@ -5,9 +5,9 @@ var request = require('request');
 var sha1=require('sha1');
 var wx_accessData = '';
 var wx_jsapi_ticket = '';
-var wx_appId = '你的微信appid';
-var wx_secret = 'd4624c36b6795d1d99dcf0547af5443d';
-var token = "weixin"; //此处需要你自己修改！
+var wx_appId = '你的appid';
+var wx_secret = '你的secret';
+var token = "yhda110"; //此处需要你自己修改！
 router.get('/home', function(req, res, next) {
 	res.sendfile("./views/index.html");
 });

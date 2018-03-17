@@ -6,7 +6,7 @@
 	<script type="text/javascript">
       if (window.location.href.indexOf('code=') == -1) {
           window.localStorage.setItem('locationUrl', window.location.href);
-          window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=你的微信appid&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_base&state=1#wechat_redirect');
+          window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=你的appid&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_base&state=1#wechat_redirect');
        }
   </script>
 </head>
