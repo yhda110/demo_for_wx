@@ -1,3 +1,4 @@
+
 #webdemo_for_wx
 
 ###### 一个简单的基于node+web的微信公众平台对接demo
@@ -61,6 +62,7 @@ router.get('/', function(req, res, next) {
 
 
 ###文档持续更新中
+
 <div class="footer">
  &emsp;&emsp;by: Storm&emsp;&emsp;WXId: yhda110
 </div>
