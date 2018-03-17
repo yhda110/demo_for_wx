@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+      if (window.location.href.indexOf('code=') == -1) {
+          window.localStorage.setItem('locationUrl', window.location.href);
+          window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=你的微信appid&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=code&scope=snsapi_base&state=1#wechat_redirect');
+       }
+  </script>
+</head>
+<body>
+	这是一个页面
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+var main = {
+	init: function(){
+		this.getAcessT();
+		var code = this.getQueryString('code');
+		if(code){
+			this.getUserInfo(code);
+		}
+	},
+	getAcessT: function(){
+		var that = this;
+		console.log(location.href)
+		$.ajax({
+			url: '/wx_config',
+			data: {
+				url: location.href.split('#')[0]
+			}
+		}).done(function(data){
+			that.wxConfig(data);
+		})
+	},
+	wxConfig: function(configData){
+		wx.config({
+   		 // 配置信息, 即使不正确也能使用 wx.ready
+		    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		    appId: configData.wx_appId, // 必填，企业号的唯一标识，此处填写企业号corpid
+		    timestamp: configData.timestamp, // 必填，生成签名的时间戳
+		    nonceStr: configData.nonceStr, // 必填，生成签名的随机串
+		    signature: configData.signature,// 必填，签名，见附录1
+		    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+		wx.ready(function(){
+			wx.onMenuShareAppMessage({
+				title: '这是一个分享的页面', // 分享标题
+				desc: '这是一个分享的页面这是一个分享的页面', // 分享描述
+				link: 'http://yhda.vicp.hk/home', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+				imgUrl: 'https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc', // 分享图标
+				type: '', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function () {
+				// 用户确认分享后执行的回调函数
+				},
+				cancel: function () {
+				// 用户取消分享后执行的回调函数
+				}
+			});
+
+		});
+	},
+	getUserInfo: function(code){
+		$.ajax({
+			url: '/get_userinfo',
+			data: {
+				code: code
+			},
+			type: 'get'
+		}).done(function(data){
+			console.log(data)
+		})
+	},
+	/*
+   * 取当前地址参数
+   * @param {number} name 参数名
+   * @return {string} 返回参数值
+   */
+  getQueryString: function (name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+          return unescape(r[2]);
+          
+      }
+      return null;
+  }
+}
+$(function(){
+	main.init();
+})
+</script>
+</html>
