@@ -8,6 +8,7 @@
 ---
 <div id="first"></div>
 ##### 前言
+
 &emsp;&emsp;距离上次微信开发已经好几年了，最近做运营活动需要重新配一套关于微信公众平台的方案，虽然网上一大堆关于这方面的资料，但是都是碎片化的，在这里整理了一下，方便大家用到的时候不用那么麻烦的找DEMO。当然，我会一步一步在这篇文档中从零开始和大家一起走一下这个流程，想必是非常有趣的。所以你需要准备的：
 
 * node;
@@ -16,7 +17,9 @@
 * 一些时间
 
 <div id="chapter1"></div>
+
 ##### 开始吧
+
 &emsp;&emsp;首先假定你安装了 *Node.js* ,接下来通过*npm*包管理工具安装GIT下来的项目的依赖。
 >$ npm install
 
@@ -24,7 +27,9 @@
 &emsp;&emsp;supervisor启动服务，然后通过微信开发者工具访问你外网的域名www.xxx.xxx/home
 >$ npm run supervisor
 <div id="chapter2"></div>
+
 ##### 从微信验证服务器开始
+
 &emsp;&emsp;我们第一步需要做微信服务器配置，在服务端*/routes/index.js*代码中添加一条router来接收微信在验证服务器时传来的get请求：
 <pre>
 router.get('/', function(req, res, next) {
